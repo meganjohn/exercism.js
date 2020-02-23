@@ -11,9 +11,12 @@ const NUCLEOTIDE_PAIRS = {
 
 export const toRna = (dna) => {
   const dnaArray = dna.split("");
-  const rnaArray = [];
-  for (const nucleotide in dnaArray) {
-    rnaArray.push(NUCLEOTIDE_PAIRS[nucleotide]);
-  };
-  return rnaArray.join("");
+
+  return dnaArray.reduce(
+    (rnaString, nucleotide) => {
+      rnaString += NUCLEOTIDE_PAIRS[nucleotide];
+      return rnaString;
+    },
+    ""
+  );
 };

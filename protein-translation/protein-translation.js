@@ -17,37 +17,41 @@ const CODON_TRANSLATION = {
 
 
 export const translate = (rna) => {
-    if (rna) {
-      return translateCodons(splitCodons(rna));
-    } else {
+    if (rna === undefined) {
       return [];
     };
+
+    return translateCodons(splitCodons(rna));
 };
 
 function splitCodons (rna) {
   const codons = [];
-  if (rna) {
-    for (let i = 0; i < rna.length; i += 3) {
-      codons.push(rna.slice(i, i + 3));
-    };
+
+  for (let i = 0; i < rna.length; i += 3) {
+    codons.push(rna.slice(i, i + 3));
   };
+
   return codons;
 }
 
 function translateCodons(codons) {
   const proteins = [];
-  let i = 0;
-  while (
-    codons[i] 
-    && codons[i] !== "UAA"
-    && codons[i] !== "UAG" 
-    && codons[i] !== "UGA") {
-      if (CODON_TRANSLATION[codons[i]]){
-        proteins.push(CODON_TRANSLATION[codons[i]]);
-        i++;
-      } else {
-        throw Error("Invalid codon");
-      };
-  };
+
+  for (const codon of codons) {
+    const isStopCodon = (codon === "UAA") || (codon === "UAG") || (codon === "UGA");
+
+    if (isStopCodon) {
+      return proteins;
+    }
+
+    const protein = CODON_TRANSLATION[codon];
+
+    if (protein === undefined) {
+      throw Error("Invalid codon");
+    }
+
+    proteins.push(protein);
+  }
+
   return proteins;
 }
