@@ -1,14 +1,53 @@
-//
-// This is only a SKELETON file for the 'Protein Translation' exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
-
-export const translate = (sequence) => {
-  var codons = [];
-  for (i = 0; i < sequence.length; i + 3) {
-    codons.push(str(sequence).slice(i, i+2));
-  }
-  return codons;
+const CODON_TRANSLATION = {
+  "AUG": "Methionine",
+  "UUU": "Phenylalanine",
+  "UUC": "Phenylalanine",
+  "UUA": "Leucine",
+  "UUG": "Leucine",
+  "UCU": "Serine",
+  "UCC": "Serine",
+  "UCA": "Serine",
+  "UCG": "Serine",
+  "UAU": "Tyrosine",
+  "UAC": "Tyrosine",
+  "UGU": "Cysteine",
+  "UGC": "Cysteine",
+  "UGG": "Tryptophan"
 };
 
-console.log(translate("ABCDEF"));
+
+export const translate = (rna) => {
+    if (rna) {
+      return translateCodons(splitCodons(rna));
+    } else {
+      return [];
+    };
+};
+
+function splitCodons (rna) {
+  const codons = [];
+  if (rna) {
+    for (let i = 0; i < rna.length; i += 3) {
+      codons.push(rna.slice(i, i + 3));
+    };
+  };
+  return codons;
+}
+
+function translateCodons(codons) {
+  const proteins = [];
+  let i = 0;
+  while (
+    codons[i] 
+    && codons[i] !== "UAA"
+    && codons[i] !== "UAG" 
+    && codons[i] !== "UGA") {
+      if (CODON_TRANSLATION[codons[i]]){
+        proteins.push(CODON_TRANSLATION[codons[i]]);
+        i++;
+      } else {
+        throw Error("Invalid codon");
+      };
+  };
+  return proteins;
+}
