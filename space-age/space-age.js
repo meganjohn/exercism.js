@@ -16,5 +16,5 @@ const fractionOfEarthYear = {
 };
 
 export const age = (planet, seconds) => 
-  (seconds / ( secondsInEarthYear * fractionOfEarthYear[planet] ) )
-  .toFixed(2) * 1;
+  Number((seconds / (secondsInEarthYear * fractionOfEarthYear[planet]))
+  .toFixed(2));
