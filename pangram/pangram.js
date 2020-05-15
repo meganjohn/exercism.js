@@ -15,6 +15,7 @@ export const isPangram = (inputString) => {
 
   for (let i = 0; i < characters.length; i++) {
     const character = characters[i];
+    //Checks if valid lower case character and not already in letters.
     if (letterSet.indexOf(character) >= 0
         && letters.indexOf(character) === -1
       ) {
