@@ -3,6 +3,7 @@
 // convenience to get you started writing code faster.
 //
 
+//Can use either .split() or spread operator in for loop below
 // const letterSet = "abcdefghijklmnopqrstuvwxyz".split('');
 const letterSet = "abcdefghijklmnopqrstuvwxyz";
 
@@ -11,6 +12,8 @@ export const isPangram = (inputString) => {
   let pangram = false;
   let characters = inputString.toLowerCase().split('');
   let letters = [];
+
+  
 
   for (let i = 0; i < characters.length; i++) {
     const character = characters[i];
