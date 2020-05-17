@@ -3,10 +3,7 @@
 // convenience to get you started writing code faster.
 //
 
-const letterSet = [
-  'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-  'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-];
+const letterSet = "abcdefghijklmnopqrstuvwxyz".split('');
 
 export const isPangram = (inputString) => {
   let pangram = false;
